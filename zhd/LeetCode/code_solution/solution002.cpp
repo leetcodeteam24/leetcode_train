@@ -5,6 +5,8 @@
 #include <unordered_map>
 using namespace std;
 
+DECLARE_SOLUTION(S002)
+
 void Solution_S002::displayQus()
 {
 	std::cout << "给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。\n\

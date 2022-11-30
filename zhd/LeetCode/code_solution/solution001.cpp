@@ -5,6 +5,9 @@
 #include <unordered_map>
 using namespace std;
 
+
+DECLARE_SOLUTION(S001)
+
 void Solution_S001::displayQus()
 {
 std::cout << "给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。\n\

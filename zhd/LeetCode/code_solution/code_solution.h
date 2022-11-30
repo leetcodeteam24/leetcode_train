@@ -1,16 +1,24 @@
 #pragma once
 #include <map>
 #include <memory>
+#include <iostream>
 
-enum CodeId {
-	S001,
-	S002,
-	S003,
-	S004,
-	S005,
+static void code_auto_register_function_();
+#define CODE_CAT_IMPL(a, b) a##b
+#define CODE_CAT(a, b) CODE_CAT_IMPL(a, b)
 
-	Count
-};
+#define CODEMANAGER_REGISTERATION \
+namespace{\
+struct code_auto_register__ { \
+	code_auto_register__() { \
+		code_auto_register_function_(); \
+	}\
+};\
+}\
+static const code_auto_register__ CODE_CAT(auto_register__, __LINE__);\
+static void code_auto_register_function_()
+
+
 
 class SolutionBase
 {
@@ -23,61 +31,49 @@ public:
 	virtual void solute() = 0;
 };
 
-class LeetCode 
+class CodeSolutionManager
 {
 public:
-	LeetCode() {}
-	~LeetCode() {}
-
-	void RegisterSolution(CodeId id, std::shared_ptr<SolutionBase> solution) {
-		m_solutions[id] = solution;
+	static CodeSolutionManager& Instance()
+	{
+		static CodeSolutionManager ins;
+		return ins;
+	}
+	void RegisterSolution(const std::string& key, std::shared_ptr<SolutionBase> solution) {
+		m_solutions[key] = solution;
 	}
 
-	void Exec(CodeId id) {
-		m_solutions[id]->displayQus();
-		m_solutions[id]->solute();
+	void Exec(const std::string& key) {
+		m_solutions[key]->displayQus();
+		m_solutions[key]->solute();
 	}
+
 private:
-	std::map<CodeId, std::shared_ptr<SolutionBase>> m_solutions;
+	std::map<std::string, std::shared_ptr<SolutionBase>> m_solutions;
+
 };
 
-#define REGISTER_SOLUTION(code_exe, codeid) code_exe->RegisterSolution(codeid, std::make_shared<Solution_##codeid>());
 
-#define DECLARE_SOLUTION(codeid) class Solution_##codeid : public SolutionBase\
+#define REGISTER_SOLUTION(codeid) CodeSolutionManager::Instance().RegisterSolution(#codeid, std::make_shared<Solution_##codeid>());
+
+#define DECLARE_SOLUTION_IMPL(codeid) class Solution_##codeid : public SolutionBase\
 {\
 public:\
 	void displayQus() override; \
 	void solute() override; \
-	CodeId Id = codeid;\
 };
 
 
 
 
-
-#define DECLARE_IMPL(codeid) DECLARE_SOLUTION(codeid)\
-static void register_solutions_##codeid(LeetCode* code_exe)\
+#define DECLARE_SOLUTION(codeid) DECLARE_SOLUTION_IMPL(codeid)\
+static void register_solutions_##codeid()\
 {\
-	REGISTER_SOLUTION(code_exe, codeid)\
+	REGISTER_SOLUTION(codeid)\
 };\
-
-
-DECLARE_IMPL(S001)
-DECLARE_IMPL(S002)
-DECLARE_IMPL(S003)
-DECLARE_IMPL(S004)
-DECLARE_IMPL(S005)
-
-
-static void register_solutions(LeetCode* code_exe)
-{
-	register_solutions_S001(code_exe);
-	register_solutions_S002(code_exe);
-	register_solutions_S003(code_exe);
-	register_solutions_S004(code_exe);
-	register_solutions_S005(code_exe);
+CODEMANAGER_REGISTERATION\
+{\
+	register_solutions_##codeid();\
 }
-
-
 
 

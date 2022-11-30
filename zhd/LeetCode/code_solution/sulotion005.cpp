@@ -5,6 +5,8 @@
 #include <unordered_map>
 using namespace std;
 
+DECLARE_SOLUTION(S005)
+
 void Solution_S005::displayQus()
 {
     std::cout << "给你一个字符串 s，找到 s 中最长的回文子串。" << endl;

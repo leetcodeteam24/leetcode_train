@@ -5,6 +5,8 @@
 #include <unordered_map>
 using namespace std;
 
+DECLARE_SOLUTION(S003)
+
 void Solution_S003::displayQus()
 {
 	std::cout << "给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。" << endl;

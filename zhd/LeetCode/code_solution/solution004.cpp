@@ -5,6 +5,9 @@
 #include <unordered_map>
 using namespace std;
 
+
+DECLARE_SOLUTION(S004)
+
 void Solution_S004::displayQus()
 {
 	std::cout << "给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。\n\
@@ -23,8 +26,8 @@ int getKthElement(const vector<int>& nums1, const vector<int>& nums2, int k) {
      * 由于我们 "删除" 了一些元素（这些元素都比第 k 小的元素要小），因此需要修改 k 的值，减去删除的数的个数
      */
 
-    int m = nums1.size();
-    int n = nums2.size();
+    int m = int(nums1.size());
+    int n = int(nums2.size());
     int index1 = 0, index2 = 0;
 
     while (true) {
