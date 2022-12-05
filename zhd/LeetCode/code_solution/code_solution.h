@@ -48,6 +48,12 @@ public:
 		m_solutions[key]->solute();
 	}
 
+	void ExecLast() {
+		auto it = m_solutions.rbegin();
+		(*it).second->displayQus();
+		(*it).second->solute();
+	}
+
 private:
 	std::map<std::string, std::shared_ptr<SolutionBase>> m_solutions;
 

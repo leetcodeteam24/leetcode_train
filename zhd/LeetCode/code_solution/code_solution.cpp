@@ -10,5 +10,5 @@
 
 int main()
 {
-    CodeSolutionManager::Instance().Exec("S005");
+    CodeSolutionManager::Instance().ExecLast();
 }
