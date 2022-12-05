@@ -145,6 +145,7 @@
     <ClCompile Include="solution003.cpp" />
     <ClCompile Include="solution004.cpp" />
     <ClCompile Include="sulotion005.cpp" />
+    <ClCompile Include="sulotion006.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code_solution.h" />

@@ -42,6 +42,9 @@
     <ClCompile Include="sulotion005.cpp">
       <Filter>源文件\middle</Filter>
     </ClCompile>
+    <ClCompile Include="sulotion006.cpp">
+      <Filter>源文件\middle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code_solution.h">
